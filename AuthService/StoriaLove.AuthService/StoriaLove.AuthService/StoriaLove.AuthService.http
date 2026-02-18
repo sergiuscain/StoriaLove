@@ -1,0 +1,6 @@
+@StoriaLove.AuthService_HostAddress = http://localhost:5046
+
+GET {{StoriaLove.AuthService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
