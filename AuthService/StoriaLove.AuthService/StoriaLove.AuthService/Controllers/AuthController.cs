@@ -12,6 +12,7 @@ namespace StoriaLove.AuthService.Controllers
         public IActionResult Register([FromBody]RegisterUserRequest request)
         {
             accountService.Register(request.UserName, request.FirstName, request.Password);
+            return NoContent();
         }
     }
 }
