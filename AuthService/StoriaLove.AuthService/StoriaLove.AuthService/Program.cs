@@ -16,9 +16,9 @@ builder.Services.AddSwaggerGen(c =>
         Description = "API для приложения знакомств"
     });
 });
-builder.Services.AddScoped<AccountRepository>();
-builder.Services.AddScoped<AccountService>();
-builder.Services.AddScoped<JwtService>();
+builder.Services.AddSingleton<AccountRepository>();
+builder.Services.AddSingleton<AccountService>();
+builder.Services.AddSingleton<JwtService>();
 builder.Services.Configure<AuthSettings>(builder.Configuration.GetSection("AuthSettings"));
 
 var app = builder.Build();
