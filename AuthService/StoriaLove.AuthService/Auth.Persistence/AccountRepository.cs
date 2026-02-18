@@ -9,4 +9,10 @@ public class AccountRepository
     {
         // Add account to any DataBase
     }
+
+    public Account GetByUserName(string userName)
+    {
+        // Returns a certain account by user name
+        return new Account(); 
+    }
 }

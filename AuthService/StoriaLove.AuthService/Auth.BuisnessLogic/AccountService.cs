@@ -18,8 +18,19 @@ public class AccountService(AccountRepository accountRepository)
         account.PasswordHash = passHash;
         accountRepository.Add(account);
     }
-    public void Login(string userName, string firstName, string password)
+    public void Login(string userName, string password)
     {
-        
+        var account = accountRepository.GetByUserName(userName);
+        var result = new PasswordHasher<Account>().
+            VerifyHashedPassword(account, account.PasswordHash, password);
+        if (result == PasswordVerificationResult.Success)
+        {
+            // Generate Token
+
+        }
+        else
+        {
+            throw new Exception("Unauthorized");
+        }
     }
 }
