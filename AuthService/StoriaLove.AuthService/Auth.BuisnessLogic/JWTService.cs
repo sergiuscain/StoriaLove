@@ -7,7 +7,7 @@ using System.Security.Claims;
 using System.Text;
 
 namespace Auth.BuisnessLogic;
-public class JWTService(IOptions<AuthSettings> options)
+public class JwtService(IOptions<AuthSettings> options)
 {
     public string GenerateToken(Account account)
     {

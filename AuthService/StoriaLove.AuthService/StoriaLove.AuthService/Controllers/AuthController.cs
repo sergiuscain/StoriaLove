@@ -17,8 +17,8 @@ namespace StoriaLove.AuthService.Controllers
         [HttpPost("Login")]
         public IActionResult Login([FromBody] LoginRequest request)
         {
-            accountService.Login(request.UserName, request.Password);
-            return NoContent();
+            var token = accountService.Login(request.UserName, request.Password);
+            return Ok(token);
         }
     }
 }
