@@ -1,3 +1,5 @@
 <Solution>
+  <Project Path="Auth.BuisnessLogic/Auth.BuisnessLogic.csproj" />
+  <Project Path="Auth.Persistence/Auth.Persistence.csproj" />
   <Project Path="StoriaLove.AuthService/StoriaLove.AuthService.csproj" />
 </Solution>
