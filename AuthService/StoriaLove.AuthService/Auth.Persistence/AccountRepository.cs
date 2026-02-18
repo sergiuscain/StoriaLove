@@ -1,10 +1,12 @@
 ﻿
+using Auth.Persistence.Models;
+
 namespace Auth.Persistence;
 
 public class AccountRepository
 {
-    public void Add()
+    public void Add(Account account)
     {
-        throw new NotImplementedException();
+        // Add account to any DataBase
     }
 }
