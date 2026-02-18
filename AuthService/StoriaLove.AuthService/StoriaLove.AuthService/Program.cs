@@ -1,3 +1,5 @@
+using Auth.BuisnessLogic;
+using Auth.Persistence;
 using Microsoft.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +16,9 @@ builder.Services.AddSwaggerGen(c =>
         Description = "API для приложения знакомств"
     });
 });
+builder.Services.AddScoped<AccountRepository>();
+builder.Services.AddScoped<AccountService>();
+builder.Services.AddScoped<JWTService>();
 
 var app = builder.Build();
 
