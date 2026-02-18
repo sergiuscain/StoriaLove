@@ -8,11 +8,12 @@ namespace StoriaLove.AuthService.Controllers
     [ApiController]
     public class AuthController(AccountService accountService) : ControllerBase
     {
-        [HttpPost]
+        [HttpPost("Register")]
         public IActionResult Register([FromBody]RegisterUserRequest request)
         {
             accountService.Register(request.UserName, request.FirstName, request.Password);
             return NoContent();
         }
+
     }
 }
