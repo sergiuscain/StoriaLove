@@ -19,6 +19,7 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddSingleton<AccountRepository>();
 builder.Services.AddSingleton<AccountService>();
 builder.Services.AddSingleton<JwtService>();
+builder.Services.AddAuth(builder.Configuration);
 builder.Services.Configure<AuthSettings>(builder.Configuration.GetSection("AuthSettings"));
 
 var app = builder.Build();
@@ -37,6 +38,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
