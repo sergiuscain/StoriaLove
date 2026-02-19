@@ -8,6 +8,14 @@ public class AccountService(AccountRepository accountRepository, JwtService jwtS
 {
     public void Register(string userName, string firstName, string password)
     {
+        if (string.IsNullOrWhiteSpace(userName))
+            throw new ArgumentException("Username is required");
+        if (string.IsNullOrWhiteSpace(firstName))
+            throw new ArgumentException("First name is required");
+        var existingAccount = accountRepository.GetByUserName(userName);
+        if (existingAccount != null)
+            throw new InvalidOperationException("User already exists");
+
         var account = new Account()
         {
             UserName = userName,
