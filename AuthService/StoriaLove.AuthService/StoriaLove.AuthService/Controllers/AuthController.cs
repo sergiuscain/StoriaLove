@@ -11,8 +11,19 @@ namespace StoriaLove.AuthService.Controllers
         [HttpPost("Register")]
         public IActionResult Register([FromBody]RegisterUserRequest request)
         {
-            accountService.Register(request.UserName, request.FirstName, request.Password);
-            return NoContent();
+            try
+            {
+                accountService.Register(request.UserName, request.FirstName, request.Password);
+                return NoContent();
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new { error = "Internal server error" });
+            }
         }
         [HttpPost("Login")]
         public IActionResult Login([FromBody] LoginRequest request)
