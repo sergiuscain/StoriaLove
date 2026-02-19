@@ -28,8 +28,19 @@ namespace StoriaLove.AuthService.Controllers
         [HttpPost("Login")]
         public IActionResult Login([FromBody] LoginRequest request)
         {
-            var token = accountService.Login(request.UserName, request.Password);
-            return Ok(token);
+            try
+            {
+                var token = accountService.Login(request.UserName, request.Password);
+                return Ok(token);
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return Unauthorized(new { error = "Invalid username or password" });
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new { error = "Internal server error" });
+            }
         }
     }
 }
