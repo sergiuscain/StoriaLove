@@ -28,16 +28,21 @@ public class AccountService(AccountRepository accountRepository, JwtService jwtS
     }
     public string Login(string userName, string password)
     {
+        if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password))
+            throw new UnauthorizedAccessException("Invalid credentials");
+
         var account = accountRepository.GetByUserName(userName);
-        var result = new PasswordHasher<Account>().
-            VerifyHashedPassword(account, account.PasswordHash, password);
+        if (account == null)
+            throw new UnauthorizedAccessException("Invalid credentials");
+
+        var result = new PasswordHasher<Account>()
+            .VerifyHashedPassword(account, account.PasswordHash, password);
+
         if (result == PasswordVerificationResult.Success)
         {
             return jwtService.GenerateToken(account);
         }
-        else
-        {
-            throw new Exception("Unauthorized");
-        }
+
+        throw new UnauthorizedAccessException("Invalid credentials");
     }
 }
