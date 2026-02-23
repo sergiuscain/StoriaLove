@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using StoriaLove.ProfileService.Models;
 
 namespace StoriaLove.ProfileService.Controllers
 {
@@ -13,13 +14,13 @@ namespace StoriaLove.ProfileService.Controllers
             return "An unauthorized user's test";
         }
         [HttpGet("User")]
-        [Authorize("UserPolicy")]
+        [Authorize(nameof(RolePoliciesEnum.UserPolicy))]
         public string GetUser()
         {
             return "Authorized 'Admin' Test";
         }
         [HttpGet("Admin")]
-        [Authorize("AdminPolicy")]
+        [Authorize(nameof(RolePoliciesEnum.AdminPolicy))]
         public string GetAdmin()
         {
             return "Authorized 'Admin' Test";

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
+using StoriaLove.ProfileService.Models;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,17 +23,17 @@ builder.Services.AddSwaggerGen(c =>
 });
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("UserPolicy", policy =>
+    options.AddPolicy(RolePoliciesEnum.UserPolicy.ToString(), policy =>
     {
-        policy.RequireClaim("User", "User");
+        policy.RequireClaim(RolesEnum.User.ToString(), RolesEnum.User.ToString());
     });
-    options.AddPolicy("ModeratorPolicy", policy =>
+    options.AddPolicy(RolePoliciesEnum.ModeratorPolicy.ToString(), policy =>
     {
-        policy.RequireClaim("Moderator", "Moderator");
+        policy.RequireClaim(RolesEnum.Moderator.ToString(), RolesEnum.Moderator.ToString());
     });
-    options.AddPolicy("AdminPolicy", policy =>
+    options.AddPolicy(RolePoliciesEnum.AdminPolicy.ToString(), policy =>
     {
-        policy.RequireClaim("Admin", "Admin");
+        policy.RequireClaim(RolesEnum.Admin.ToString(), RolesEnum.Admin.ToString());
     });
 });
 var authSettings = builder.Configuration.GetSection(nameof(AuthSettings))
