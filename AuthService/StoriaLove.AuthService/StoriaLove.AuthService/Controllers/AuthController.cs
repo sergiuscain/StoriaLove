@@ -44,5 +44,19 @@ namespace StoriaLove.AuthService.Controllers
                 return StatusCode(500, new { error = "Internal server error" });
             }
         }
+        [HttpPost("Logout")]
+        public IActionResult Logout()
+        {
+            // Удаляем куку с токеном
+            HttpContext.Response.Cookies.Append("JTC", "", new CookieOptions
+            {
+                Expires = DateTime.UtcNow.AddDays(-1), // Setting the date in the past
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Strict
+            });
+
+            return Ok(new { message = "Logged out successfully" });
+        }
     }
 }
