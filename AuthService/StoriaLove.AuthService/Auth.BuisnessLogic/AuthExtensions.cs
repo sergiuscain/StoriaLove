@@ -26,6 +26,7 @@ public static class AuthExtensions
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authSettings.SecretKey))
                 };
             });
+        servicesCollection.AddAuthorization();
         return servicesCollection;
     }
 }

@@ -20,6 +20,21 @@ builder.Services.AddSwaggerGen(c =>
         Description = "API для приложения знакомств"
     });
 });
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("UserPolicy", policy =>
+    {
+        policy.RequireClaim("User", "User");
+    });
+    options.AddPolicy("ModeratorPolicy", policy =>
+    {
+        policy.RequireClaim("Moderator", "Moderator");
+    });
+    options.AddPolicy("AdminPolicy", policy =>
+    {
+        policy.RequireClaim("Admin", "Admin");
+    });
+});
 var authSettings = builder.Configuration.GetSection(nameof(AuthSettings))
             .Get<AuthSettings>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

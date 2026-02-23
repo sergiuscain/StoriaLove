@@ -7,22 +7,22 @@ namespace StoriaLove.ProfileService.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        [HttpGet("One")]
-        public string GetOne()
+        [HttpGet("NotAuth")]
+        public string GetNotAuth()
         {
-            return "Test1";
+            return "An unauthorized user's test";
         }
-        [HttpGet("Two")]
-        [Authorize]
-        public string GetTwo()
+        [HttpGet("User")]
+        [Authorize("UserPolicy")]
+        public string GetUser()
         {
-            return "Test2";
+            return "Authorized 'Admin' Test";
         }
-        [HttpGet("Three")]
-        [Authorize]
-        public string GetThree()
+        [HttpGet("Admin")]
+        [Authorize("AdminPolicy")]
+        public string GetAdmin()
         {
-            return "Test3";
+            return "Authorized 'Admin' Test";
         }
     }
 }
