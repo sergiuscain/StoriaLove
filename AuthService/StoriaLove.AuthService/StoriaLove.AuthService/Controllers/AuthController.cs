@@ -26,11 +26,13 @@ namespace StoriaLove.AuthService.Controllers
             }
         }
         [HttpPost("Login")]
-        public IActionResult Login([FromBody] LoginRequest request)
+        public IActionResult Login(LoginRequest request)
         {
             try
             {
+                //JTC - name of cookies for JWT TOKEN (JWT Token Cookie - JTC)
                 var token = accountService.Login(request.UserName, request.Password);
+                HttpContext.Response.Cookies.Append("JTC", token);
                 return Ok(token);
             }
             catch (UnauthorizedAccessException)
