@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace StoriaLove.ProfileService.Controllers
@@ -6,21 +7,22 @@ namespace StoriaLove.ProfileService.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries =
-        [
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        ];
-
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        [HttpGet("One")]
+        public string GetOne()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+            return "Test1";
+        }
+        [HttpGet("Two")]
+        [Authorize]
+        public string GetTwo()
+        {
+            return "Test2";
+        }
+        [HttpGet("Three")]
+        [Authorize]
+        public string GetThree()
+        {
+            return "Test3";
         }
     }
 }
