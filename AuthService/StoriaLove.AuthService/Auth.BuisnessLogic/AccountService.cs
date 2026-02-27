@@ -20,7 +20,7 @@ public class AccountService(AccountRepository accountRepository, JwtService jwtS
         {
             UserName = userName,
             FirstName = firstName,
-            Id = Guid.NewGuid(),
+            UserId = Guid.NewGuid(),
         };
         var passHash = new PasswordHasher<Account>().HashPassword(account, password);
         account.PasswordHash = passHash;

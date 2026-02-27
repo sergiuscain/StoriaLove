@@ -15,7 +15,7 @@ public class JwtService(IOptions<AuthSettings> options)
         {
             new Claim("userName", account.UserName),
             new Claim("firstName", account.FirstName),
-            new Claim("id", account.Id.ToString()),
+            new Claim("id", account.UserId.ToString()),
         };
         //Add role to claims
         foreach (var role in account.Roles)
