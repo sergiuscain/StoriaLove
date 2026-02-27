@@ -1,8 +1,11 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.CookiePolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
+using StoriaLove.ProfileService.DB;
 using StoriaLove.ProfileService.Models;
+using StoriaLove.ProfileService.Services;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +13,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ProfileDbContext>(options => options.UseNpgsql(connectionString));
+builder.Services.AddTransient<ProfileRepository>();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen(c =>
